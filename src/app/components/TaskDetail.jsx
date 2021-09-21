@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 import * as mutations from '../store/mutations'
 
 const TaskDetail = ({
+    // from state
     id,
     comments,
     task,
     isComplete,
     groups,
-    setTaskCompletion
+    // from dispatch
+    setTaskCompletion,
+    setTaskGroup,
+    setTaskName
 })=>(
     <div>
         <div>
-            <input value={task.name}/>
+            <input onChange={setTaskName} value={task.name}/>
         </div>
         <div>
             <button onClick={()=>setTaskCompletion(id, !isComplete)}>
@@ -22,7 +26,7 @@ const TaskDetail = ({
         </div>
 
         <div>
-            <select>
+            <select onChange={setTaskGroup} value={task.group}>
                 {groups.map(group=>(
                     <option key={group.id} value={group.id}>{group.name}</option>
                 ))}
@@ -54,6 +58,12 @@ const mapDispatchToProps = (dispatch, ownProps)=>{
     return {
         setTaskCompletion(id, isComplete) {
             dispatch(mutations.setTaskCompletion(id, isComplete));
+        },
+        setTaskGroup(event) {
+            dispatch(mutations.setTaskGroup(id, event.target.value));
+        },
+        setTaskName(event) {
+            dispatch(mutations.setTaskName(id, event.target.value));
         }
     }
 }
