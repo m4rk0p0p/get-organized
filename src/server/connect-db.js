@@ -13,5 +13,3 @@ export async function connectDb() {
 
     return db;
 }
-
-//connectDb();
