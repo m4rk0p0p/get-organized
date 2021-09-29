@@ -3,6 +3,7 @@ export const CREATE_TASK = `CREATE_TASK`;
 export const SET_TASK_COMPLETE = `SET_TASK_COMPLETE`;
 export const SET_TASK_GROUP = `SET_TASK_GROUP`;
 export const SET_TASK_NAME = `SET_TASK_NAME`;
+export const REQUEST_AUTH_USER = `REQUEST_AUTH_USER`;
 
 export const requestTaskCreation = (groupId)=>({
     type:REQUEST_TASK_CREATION,
@@ -16,20 +17,26 @@ export const createTask = (taskId, groupId, ownerId)=>({
     ownerId
 });
 
-export const setTaskCompletion = (id, isComplete)=>({
+export const setTaskCompletion = (id, isComplete) => ({
     type: SET_TASK_COMPLETE,
     taskId: id,
     isComplete
 });
 
-export const setTaskName = (id, name)=>({
+export const setTaskName = (id, name) => ({
     type: SET_TASK_NAME,
     taskId: id,
     name
 });
 
-export const setTaskGroup = (id, groupId)=>({
+export const setTaskGroup = (id, groupId) => ({
     type: SET_TASK_GROUP,
     taskId: id,
     groupId
 });
+
+export const requestAuthenticateUser = (username, password) => ({
+    type: REQUEST_AUTH_USER,
+    username,
+    password
+})
