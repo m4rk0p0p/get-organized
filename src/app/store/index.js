@@ -9,6 +9,9 @@ import * as mutations from "./mutations"
 
 export const store = createStore(
     combineReducers({
+        session(session = defaultState.session) {
+            return session;
+        },
         tasks(tasks = defaultState.tasks, action) {
             switch(action.type) {
                 case mutations.CREATE_TASK:
@@ -57,6 +60,6 @@ for (let saga in sagas) {
     // Importing from mock sagas gives an object (or array?) holding
     // all sagas. Then iterating through those with for each loop
     // returns just a name of the saga, but not the saga itself?!
-    // Gotta love javascript.
+    // Gotta love javascript. 
     sagaMiddleware.run(sagas[saga])
 }
