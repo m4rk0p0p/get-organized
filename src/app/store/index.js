@@ -9,8 +9,17 @@ import * as mutations from "./mutations"
 
 export const store = createStore(
     combineReducers({
-        session(session = defaultState.session || {}) {
-            return session;
+        session(userSession = defaultState.session || {}, action) {
+            let {type, authenticated, session} = action;
+            console.info("Reducer for sessions: ", type, ", ", authenticated, ", ", session);
+            switch (type) {
+                case mutations.REQUEST_AUTH_USER:
+                    return {...userSession, authenticated: mutations.AUTH_IN_PROGRESS};
+                case mutations.AUTH_IN_PROGRESS:
+                    return {...userSession, authenticated};
+                default:
+                    return userSession;
+            }
         },
         tasks(tasks = defaultState.tasks, action) {
             switch(action.type) {

@@ -47,3 +47,19 @@ export function* taskModificationSaga() {
         console.info("Got response after update:", res);
     }
 }
+
+export function* userAuthenticationSaga() {
+    while (true) {
+        const {username, password} = yield take(mutations.REQUEST_AUTH_USER);
+
+        try {
+            const { res } = axios.post(url + "/authenticate", {username, password});
+            if (!res) {
+                throw new Error();
+            }
+        } catch (err) {
+            console.log("Unable to authenticate");
+            yield put(mutations.processAuthenticateUser(mutatations.AUTH_FAILURE));
+        }
+    }
+}
